@@ -32,14 +32,12 @@ public class Game {
 
         rw = randW();
         rh = randH();
-        while(this.board.getTresPos()[0][0] == rw && this.board.getTresPos()[1][0] == rh && this.Wesker.getPosition()[0][0] == rw && this.Wesker.getPosition()[1][0] == rh && this.Nemesis.getPosition()[0][0] == rw && this.Nemesis.getPosition()[1][0] == rh){
+        while(this.board.getTresPos()[0][0] == rh && this.board.getTresPos()[1][0] == rh && this.Wesker.getPosition()[0][0] == rw && this.Wesker.getPosition()[1][0] == rh && this.Nemesis.getPosition()[0][0] == rw && this.Nemesis.getPosition()[1][0] == rh){
             rw = randW();
             rh = randH();
         }
         this.player = new Player(rw, rh);
     }
-
-
 
     public int randW(){
         Random rand = new Random();
@@ -48,9 +46,6 @@ public class Game {
     public int randH(){
         Random rand = new Random();
         return rand.nextInt(board.getHeight()) + 1;
-    }
-    public static void gameStart(){
-
     }
 
     public Player getPlayer() {
@@ -85,6 +80,21 @@ public class Game {
         default:
             System.out.println("Invalid move");
     }
+
     }
+
+    public int getDistW(){
+        return board.getTresPos()[0][0] - player.getPosition()[0][0];
+    }
+
+    public int getDistH(){
+        return board.getTresPos()[1][0] - player.getPosition()[1][0];
+    }
+
+    public static void gameStart(){
+        System.out.println("Welcome to the game!");
+        
+    }
+
 
 }

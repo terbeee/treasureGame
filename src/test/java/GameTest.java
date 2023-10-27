@@ -101,6 +101,20 @@ class GameTest {
         assertNotEquals(game.Wesker.getPosition(), game.Nemesis.getPosition());
     }
 
+    @Test
+    public void testDistW(){
+        game.player.setPlayerPos(1,1);
+        game.board.setTresPos(2,2);
+        assertEquals(1, game.getDistW());
+    }
+
+    @Test
+    public void testDistH(){
+        game.player.setPlayerPos(1,1);
+        game.board.setTresPos(2,2);
+        assertEquals(1, game.getDistH());
+    }
+
 
 
 
