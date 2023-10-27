@@ -4,21 +4,52 @@ public class Game {
     Player player;
     Board board;
 
+    Monster Wesker;
+    Monster Nemesis;
+
     public Game(int w, int h) {
-        Random rand = new Random();
+
         this.board = new Board(w,h);
 
-        int rw = rand.nextInt(w) + 1;
-        int rh = rand.nextInt(h) + 1;
-        while(this.board.getTresPos()[0][0] == rw && this.board.getTresPos()[1][0] == rh){ //Ensures the player doesn't spawn on top of the treasure
-            rw = rand.nextInt(w) + 1;
-            rh = rand.nextInt(h) + 1;
+        int rh = randH();
+        int rw = randW();
+        while(this.board.getTresPos()[0][0] == rw && this.board.getTresPos()[1][0] == rh){
+            rw = randW();
+            rh = randH();
+        }
+
+        this.Wesker = new Monster(rw, rh, "Wesker", "Poor performance indeed");
+
+        //"If I Had More Time, I Would Have Written a Shorter Letter" - Blaire Pascal
+        //AKA this spawning method sucks, refactor in future
+        rw = randW();
+        rh = randH();
+        while(this.board.getTresPos()[0][0] == rw && this.board.getTresPos()[1][0] == rh && this.Wesker.getPosition()[0][0] == rw && this.Wesker.getPosition()[1][0] == rh){
+            rw = randW();
+            rh = randH();
+        }
+        this.Nemesis = new Monster(rw, rh, "Nemesis", "*various muffled shouting*");
+
+        rw = randW();
+        rh = randH();
+        while(this.board.getTresPos()[0][0] == rw && this.board.getTresPos()[1][0] == rh && this.Wesker.getPosition()[0][0] == rw && this.Wesker.getPosition()[1][0] == rh && this.Nemesis.getPosition()[0][0] == rw && this.Nemesis.getPosition()[1][0] == rh){
+            rw = randW();
+            rh = randH();
         }
         this.player = new Player(rw, rh);
-
     }
 
-    public static void gameStart(int w, int h){
+
+
+    public int randW(){
+        Random rand = new Random();
+        return rand.nextInt(board.getWidth()) + 1;
+    }
+    public int randH(){
+        Random rand = new Random();
+        return rand.nextInt(board.getHeight()) + 1;
+    }
+    public static void gameStart(){
 
     }
 
@@ -30,8 +61,30 @@ public class Game {
         return board;
     }
 
-    public boolean isWin(int[][] playerPos, int[][] tresPos){
+    public boolean isWin(int[][] playerPos, int[][] tresPos){ //checks if player has found treasure
         return Arrays.deepEquals(playerPos, tresPos);
-
     }
+
+    public void movePlayer(String move){
+    move = move.toUpperCase();
+
+    switch (move){
+        case "UP":
+            player.playerUp();
+            break;
+        case "DOWN":
+            player.playerDown();
+            break;
+        case "LEFT":
+            player.playerLeft();
+            break;
+        case "RIGHT":
+            player.playerRight();
+            break;
+
+        default:
+            System.out.println("Invalid move");
+    }
+    }
+
 }

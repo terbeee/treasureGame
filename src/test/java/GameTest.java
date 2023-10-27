@@ -55,5 +55,53 @@ class GameTest {
         assertEquals(true, game.isWin(game.getBoard().getTresPos(), game.getPlayer().getPosition()));
     }
 
+    @Test
+    public void testMoveUp(){
+        game.getPlayer().setPlayerPos(2,2);
+        game.movePlayer("UP");
+        assertEquals(3, game.getPlayer().getPosition()[1][0]);
+    }
+
+    @Test
+    public void testMoveDown(){
+        game.getPlayer().setPlayerPos(2,2);
+        game.movePlayer("DOWN");
+        assertEquals(1, game.getPlayer().getPosition()[1][0]);
+    }
+
+    @Test
+    public void testMoveLeft(){
+        game.getPlayer().setPlayerPos(2,2);
+        game.movePlayer("LEFT");
+        assertEquals(1, game.getPlayer().getPosition()[0][0]);
+    }
+
+    @Test
+    public void testMoveRight(){
+        game.getPlayer().setPlayerPos(2,2);
+        game.movePlayer("RIGHT");
+        assertEquals(3, game.getPlayer().getPosition()[0][0]);
+    }
+
+    @Test
+    public void testWesker(){
+        game.Wesker.setPlayerPos(1,1);
+        assertEquals(1, game.Wesker.getPosition()[0][0]);
+    }
+    @Test
+    public void testNemesis(){
+        game.Nemesis.setPlayerPos(1,1);
+        assertEquals(1, game.Nemesis.getPosition()[0][0]);
+    }
+
+    @Test
+    public void testOverlap(){
+        System.out.println(Arrays.deepToString(game.Wesker.getPosition()));
+        System.out.println(Arrays.deepToString(game.Nemesis.getPosition()));
+        assertNotEquals(game.Wesker.getPosition(), game.Nemesis.getPosition());
+    }
+
+
+
 
 }
