@@ -7,8 +7,13 @@ public class Game {
     public Game(int w, int h) {
         Random rand = new Random();
         this.board = new Board(w,h);
+
         int rw = rand.nextInt(w) + 1;
         int rh = rand.nextInt(h) + 1;
+        while(this.board.getTresPosW() == rw && this.board.getTresPosH() == rh){ //Ensures the player doesn't spawn on top of the treasure
+            rw = rand.nextInt(w) + 1;
+            rh = rand.nextInt(h) + 1;
+        }
         this.player = new Player(rw, rh);
 
     }
