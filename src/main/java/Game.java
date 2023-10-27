@@ -18,7 +18,7 @@ public class Game {
             rh = randH();
         }
 
-        this.Wesker = new Monster(rw, rh, "Wesker", "Poor performance indeed");
+        this.Wesker = new Monster(rw, rh, "Wesker", "'Poor performance indeed.'");
 
         //"If I Had More Time, I Would Have Written a Shorter Letter" - Blaire Pascal
         //AKA this spawning method sucks, refactor in future
@@ -28,7 +28,7 @@ public class Game {
             rw = randW();
             rh = randH();
         }
-        this.Nemesis = new Monster(rw, rh, "Nemesis", "*various muffled shouting*");
+        this.Nemesis = new Monster(rw, rh, "Nemesis", "'S.T.A.R.S'");
 
         rw = randW();
         rh = randH();
@@ -91,9 +91,54 @@ public class Game {
         return board.getTresPos()[1][0] - player.getPosition()[1][0];
     }
 
-    public static void gameStart(){
-        System.out.println("Welcome to the game!");
-        
+    public void gameStart(){
+        System.out.println("Welcome to the game!\nYou are at position " + Arrays.deepToString(player.getPosition()));
+        boolean gameOver = false;
+        Scanner myObj = new Scanner(System.in);
+        int distW;
+        int distH;
+        String move;
+        System.out.println("Wesker: " + Arrays.deepToString(Wesker.getPosition()));
+        System.out.println("Nemesis: " + Arrays.deepToString(Nemesis.getPosition()));
+        System.out.println("Treasure: " + Arrays.deepToString(board.getTresPos()));
+
+        while (!gameOver){
+            if (Arrays.deepEquals(player.getPosition(), Wesker.getPosition())){
+                System.out.println(Wesker.getGreeting());
+                System.out.println("Oh no! " + Wesker.getName() + " caught you, game over.");
+                gameOver = true;
+            } else if ((Arrays.deepEquals(player.getPosition(), Nemesis.getPosition()))){
+                System.out.println(Nemesis.getGreeting());
+                System.out.println("Oh no! " + Nemesis.getName() + " caught you, game over.");
+                gameOver = true;
+            } else if (isWin(player.getPosition(), getBoard().getTresPos())) {
+                System.out.println("You found the treasure! You win!");
+                gameOver = true;
+            } else {
+                distH = getDistH();
+                distW = getDistW();
+                if (distH < 0){
+                    System.out.println("The treasure is " + distH *-1 + " steps down");
+                } else {
+                    System.out.println("The treasure is " + distH + " steps up");
+                }
+
+                if (distW < 0){
+                    System.out.println("The treasure is " + distW*-1 + " steps left");
+                } else {
+                    System.out.println("The treasure is " + distW + " steps right");
+                }
+
+                System.out.print("Enter your move (UP, DOWN, LEFT, RIGHT): ");
+                move = myObj.nextLine();
+                movePlayer(move);
+            }
+
+
+
+
+        }
+
     }
 
 
