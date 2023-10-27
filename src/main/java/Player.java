@@ -9,7 +9,7 @@ public class Player {
         return position;
     }
 
-    public void setPosition(int[][] position) {
-        this.position = position;
+    public void setPlayerPos(int w, int h) {
+        this.position = new int[][]{{w},{h}};
     }
 }

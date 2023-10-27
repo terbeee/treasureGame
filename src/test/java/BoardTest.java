@@ -21,7 +21,7 @@ class BoardTest {
     public void testTreasure(){
         //Does it generate treasure and can we manipulate its pos
         board.setTresPos(1,1);
-        assertEquals(1, board.getTresPosW());
+        assertEquals(1, board.getTresPos()[0][0]);
     }
 
 

@@ -20,12 +20,8 @@ public class Board {
 
     }
 
-    public int getTresPosW() {
-        return tresPos[0][0];
-    }
-
-    public int getTresPosH(){
-        return tresPos[1][0];
+    public int[][] getTresPos() {
+        return tresPos;
     }
 
     public void setTresPos(int w, int h) {

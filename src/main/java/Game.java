@@ -1,4 +1,4 @@
-import java.util.Random;
+import java.util.*;
 public class Game {
 
     Player player;
@@ -10,7 +10,7 @@ public class Game {
 
         int rw = rand.nextInt(w) + 1;
         int rh = rand.nextInt(h) + 1;
-        while(this.board.getTresPosW() == rw && this.board.getTresPosH() == rh){ //Ensures the player doesn't spawn on top of the treasure
+        while(this.board.getTresPos()[0][0] == rw && this.board.getTresPos()[1][0] == rh){ //Ensures the player doesn't spawn on top of the treasure
             rw = rand.nextInt(w) + 1;
             rh = rand.nextInt(h) + 1;
         }
@@ -28,5 +28,10 @@ public class Game {
 
     public Board getBoard() {
         return board;
+    }
+
+    public boolean isWin(int[][] playerPos, int[][] tresPos){
+        return Arrays.deepEquals(playerPos, tresPos);
+
     }
 }
